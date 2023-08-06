@@ -1,0 +1,3 @@
+frontend/components/ui/* linguist-vendored
+frontend/lib/utils.ts linguist-vendored
+frontend/styles.css linguist-vendored
