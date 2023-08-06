@@ -1,0 +1,1731 @@
+.deckcard {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .2);
+    border-radius: 3px;
+    position: relative;
+    transition: box-shadow .15s ease-out
+}
+
+.deckcard:hover {
+    box-shadow: 0 8px 12px 0 rgba(0, 0, 0, .4)
+}
+
+.deckcard-flag {
+    height: 120px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 3px 3px 0 0;
+    position: relative
+}
+
+.num-of-rarity {
+    display: inline-block;
+    margin: .3em
+}
+
+.num-of-rarity-first {
+    font-weight: 700;
+    border-right: 1px solid #ccc;
+    padding-right: .5em
+}
+
+.num-of-rarity-second {
+    border-left: 1px solid #fff;
+    padding-left: .5em
+}
+
+.deckcard-category {
+    text-align: right;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 1px 1px 12px #fff;
+    font-style: italic;
+    padding: 1px 5px 1px 0;
+    letter-spacing: 3px;
+    font-size: 12px
+}
+
+.deckcard-category-common {
+    background: rgba(126, 126, 126, .1)
+}
+
+.deckcard-category-common .deckcard-category {
+    background: linear-gradient(to top right, rgba(255, 255, 255, 0) 0%, rgba(126, 126, 126, 1) 100%);
+    text-shadow: none;
+    letter-spacing: initial
+}
+
+.deckcard-category-common .deckcard-stripe {
+    background: #7e7e7e
+}
+
+.deckcard-category-common .deckcard-category:before {
+    content: "COMMON"
+}
+
+.deckcard-category-uncommon {
+    background: rgba(0, 170, 76, .1)
+}
+
+.deckcard-category-uncommon .deckcard-category {
+    background: linear-gradient(to top right, rgba(255, 255, 255, 0) 0%, rgba(0, 170, 76, 1) 100%)
+}
+
+.deckcard-category-uncommon .deckcard-stripe {
+    background: #00aa4c
+}
+
+.deckcard-category-uncommon .deckcard-category:before {
+    content: "UNCOMMON"
+}
+
+.deckcard-category-rare {
+    background: rgba(0, 142, 193, .1)
+}
+
+.deckcard-category-rare .deckcard-category {
+    background: linear-gradient(to top right, rgba(255, 255, 255, 0) 0%, rgba(0, 142, 193, 1) 100%)
+}
+
+.deckcard-category-rare .deckcard-stripe {
+    background: #008ec1
+}
+
+.deckcard-category-rare .deckcard-category:before {
+    content: "RARE"
+}
+
+.deckcard-category-ultra-rare {
+    background: rgba(172, 0, 230, .1)
+}
+
+.deckcard-category-ultra-rare .deckcard-category {
+    background: linear-gradient(to top right, rgba(255, 255, 255, 0) 0%, rgba(172, 0, 230, 1) 100%)
+}
+
+.deckcard-category-ultra-rare .deckcard-stripe {
+    background: #ac00e6
+}
+
+.deckcard-category-ultra-rare .deckcard-category:before {
+    content: "ULTRA RARE"
+}
+
+.deckcard-category-epic {
+    background: rgba(219, 158, 28, .1)
+}
+
+.deckcard-category-epic .deckcard-category {
+    background: linear-gradient(to top right, rgba(255, 255, 255, 0) 0%, rgba(219, 158, 28, 1) 100%)
+}
+
+.deckcard-category-epic .deckcard-stripe {
+    background: #db9e1c
+}
+
+.deckcard-category-epic .deckcard-category:before {
+    content: "EPIC"
+}
+
+.deckcard-category-legendary {
+    background: rgba(255, 215, 0, .1)
+}
+
+.deckcard-category-legendary .deckcard-category {
+    background: linear-gradient(to top right, rgba(255, 255, 255, 0) 0%, rgba(255, 215, 0, 1) 100%)
+}
+
+.deckcard-category-legendary .deckcard-stripe {
+    background: gold
+}
+
+.deckcard-category-legendary .deckcard-category:before {
+    content: "LEGENDARY"
+}
+
+.deckcard-title {
+    text-align: center;
+    margin: 6px
+}
+
+.deckcard-title .nname {
+    font-weight: 700
+}
+
+.deckcard-slogan {
+    font-family: Georgia, serif;
+    font-size: 11px;
+    font-style: italic;
+    color: #666;
+    text-align: center;
+    margin: 9px 6px
+}
+
+.deckcard .deckcard-stripe {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0 0 3px 3px;
+    position: absolute;
+    bottom: 0;
+    width: 100%
+}
+
+.deckcard-season {
+    color: #fff;
+    font-size: 75%;
+    margin: 0 .25em
+}
+
+.deckcard-region {
+    margin: 0 .4em;
+    text-align: right
+}
+
+.deckcard-region p.rlink {
+    color: #fff;
+    font-weight: 700
+}
+
+.deckcard-badges {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: baseline;
+    text-align: center;
+    position: relative
+}
+
+.deckcard-badges img.badge {
+    max-width: 36px
+}
+
+.deckcard-badges .badge {
+    margin: 1px
+}
+
+.deckcard-badges #trophycabinet {
+    float: none;
+    margin: 0
+}
+
+.deckcard-badges #trophycabinet img.trophy,
+.deckcard-badges .specialbadges img {
+    max-width: 36px
+}
+
+.deckcard-desc {
+    color: #666;
+    font-size: 11px;
+    margin: 1em;
+    padding: 1em;
+    box-shadow: 0 0 2px #ccc inset;
+    background: #fff
+}
+
+.deckcard-govt {
+    color: #aaa;
+    font-size: 10px;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 2px;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc
+}
+
+.deckcard-badges .mod_status,
+.deckcard-badges .semimod_status,
+.deckcard-badges .mentor_status,
+.deckcard-badges .wa_status,
+.deckcard-badges .class_status {
+    font-size: 90%;
+    box-shadow: none
+}
+
+.deckcard-badges .mod_status,
+.deckcard-badges .wa_status,
+.deckcard-badges .class_status {
+    padding-left: 2px
+}
+
+.deckcard-info {
+    border-radius: 3px 3px 0 0;
+    background: rgba(0, 0, 0, .5);
+    color: #fff;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    opacity: 0;
+    transition: opacity .2s ease-out;
+    cursor: pointer
+}
+
+.deckcard:not(.flipped) .deckcard-info.show {
+    opacity: 1
+}
+
+.deckcard-info div {
+    opacity: 0;
+    pointer-events: none
+}
+
+.deckcard-info.show div {
+    opacity: 1;
+    pointer-events: initial
+}
+
+.deckcard-info-topline {
+    font-size: 80%;
+    margin: 0 1em
+}
+
+.deckcard-info-cardnumber {
+    text-align: left
+}
+
+.deckcard-info-viewnation {
+    float: right
+}
+
+.deckcard-info a:not(.button) {
+    color: #fff
+}
+
+.deckcard-info-cardlink p {
+    font-weight: 700;
+    border: 1px solid #dadad2;
+    padding: .4em 4em;
+    border-radius: .6em
+}
+
+.deckcard-info-cardlink p:hover {
+    color: #333;
+    background-color: #eee;
+    text-decoration: none
+}
+
+.deckcard-card-buyers,
+.deckcard-card-mv {
+    position: absolute;
+    top: 1em;
+    background-color: #fff;
+    border-radius: 2px;
+    margin: 1em .4em;
+    padding: 1px 3px;
+    font-size: 67%;
+    opacity: .8
+}
+
+.deckcard-card-buyers {
+    right: 1em
+}
+
+.deckcard-card-mv {
+    left: 1em
+}
+
+figure .deckcard-info .deckcard-info-content {
+    display: contents
+}
+
+.decklist {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    clear: right
+}
+
+.deckcard-info-data {
+    text-align: center;
+    padding: 0
+}
+
+.deckcard-info-data p {
+    margin: 1em
+}
+
+.deckcard-info-data span {
+    font-size: 150%
+}
+
+.decklist-section {
+    padding: 1em
+}
+
+.deckcard-token {
+    font-size: 9px;
+    padding: 2px 6px;
+    border: 1px solid #f0f0f0;
+    color: #444
+}
+
+td .deckcard-token {
+    float: right;
+    margin-left: .5em
+}
+
+#deck-summary .deckcard-token {
+    font-size: 11px
+}
+
+.deckcard-owned {
+    border-color: #444
+}
+
+#deck-bank {
+    font-size: 120%;
+    background: #444;
+    padding: 2px 11px;
+    color: #fff;
+    border-radius: 3px
+}
+
+#deck-numcards {
+    font-weight: 700;
+    font-size: 120%
+}
+
+.deckcard-offerbox {
+    display: none
+}
+
+.deckcard-card-stats {
+    border-radius: 3px;
+    margin-top: 1em
+}
+
+.deckcard-card-stats td {
+    padding: 0 .5em;
+    font-size: 90%;
+    border-radius: 3px
+}
+
+.deckcard-card-stats td:nth-child(1) {
+    color: #333
+}
+
+.deckcard-card-stats td:nth-child(2) {
+    text-align: center;
+    font-size: 110%;
+    padding: 4px;
+    font-weight: 700
+}
+
+.deckcard-tip-box {
+    max-width: 38%;
+    float: right;
+    text-align: center
+}
+
+.deckcard-tip-box h4 {
+    font-variant: small-caps;
+    margin-bottom: 6px
+}
+
+.deckcard-tip-view-auctions {
+    font-size: 120%
+}
+
+.deckcard-container {
+    overflow: hidden;
+    width: 280px;
+    height: 400px;
+    margin: 12px;
+    display: inline-block;
+    position: relative;
+    perspective: 800px;
+    margin: 12px;
+    transition: transform .2s
+}
+
+.deckcard-container:hover {
+    transform: translateY(-5px)
+}
+
+.deckcard {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    transform-style: preserve-3d
+}
+
+.deckcard.flipped {
+    cursor: pointer;
+    transform: rotateY(180deg)
+}
+
+.deckcard.ready {
+    transition: transform 1s, box-shadow .15s ease-out
+}
+
+.deckcard figure {
+    display: block;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    position: absolute;
+    backface-visibility: hidden
+}
+
+.deckcard .back {
+    border-radius: 2px;
+    background: #eaeae2;
+    background: url(https://www.nationstates.net/images/island_small.png) #eaeae2;
+    background-repeat: no-repeat;
+    background-position: center
+}
+
+.deckcard .back {
+    transform: rotateY(180deg)
+}
+
+.deckcard.junked .back {
+    background: #666
+}
+
+.deckcard.junked .back:before {
+    content: "JUNKED";
+    margin-top: 90px;
+    font-size: 44px;
+    font-weight: 700;
+    color: #777;
+    text-shadow: -1px -1px 1px #606060;
+    text-align: center;
+    display: block
+}
+
+#auctiontablebox {
+    clear: right
+}
+
+#cardauctiontable {
+    margin: 1em auto;
+    width: auto;
+    border-spacing: 0;
+    border-collapse: collapse
+}
+
+#cardauctiontable th {
+    background-color: #cacac2;
+    color: #fff;
+    font-size: 120%;
+    border-radius: 0;
+    font-weight: 400;
+    padding: 0 1em
+}
+
+#cardauctiontable thead td {
+    padding-top: 1em;
+    color: #999;
+    font-size: 80%;
+    text-align: center
+}
+
+#cardauctiontable th:nth-child(1) {
+    text-align: right;
+    border-radius: .5em 0 0 0
+}
+
+#cardauctiontable th:nth-child(2) {
+    background-color: transparent
+}
+
+#cardauctiontable th:nth-child(3) {
+    text-align: left;
+    border-radius: 0 .5em 0 0
+}
+
+#cardauctiontable tbody tr {
+    transition: box-shadow .15s ease-out
+}
+
+#cardauctiontable tbody td {
+    border-radius: 0;
+    border-bottom: 1px solid #dadad2
+}
+
+#cardauctiontable td p {
+    margin: .4em
+}
+
+#cardauctiontable td:nth-child(1) {
+    text-align: right;
+    width: 35%
+}
+
+#cardauctiontable td:nth-child(2),
+#cardauctiontable td:nth-child(3),
+#cardauctiontable td:nth-child(4) {
+    text-align: center
+}
+
+#cardauctiontable td:nth-child(5) {
+    text-align: left;
+    width: 35%
+}
+
+.cardauctionmatchedrow {
+    background-color: #ffffe0
+}
+
+.cardprice {
+    margin: .5em 1em;
+    display: inline-block
+}
+
+.cardauctionmatchedrow td:nth-child(3) .cardprice {
+    font-weight: 700
+}
+
+#cardauctiontable td:nth-child(2) .cardprice {
+    color: #fc3737
+}
+
+#cardauctiontable td:nth-child(4) .cardprice {
+    color: #4f4ffe
+}
+
+.cardauction-lowestmatchedbid td:nth-child(4) p {
+    border: 1px solid #4f4ffe
+}
+
+.cardauction-highestmatchedoffer td:nth-child(2) p {
+    border: 1px solid #fc3737
+}
+
+.cardprice_sell {
+    color: #fc3737
+}
+
+.cardprice_buy {
+    color: #4f4ffe
+}
+
+.cardprice_withdrawn {
+    text-decoration: line-through
+}
+
+.cardprice_traded {
+    font-weight: 700
+}
+
+.auction_to_match_text {
+    font-size: 85%
+}
+
+.auction_to_match_text .cardprice_sell,
+.auction_to_match_text .cardprice_buy {
+    font-weight: 700
+}
+
+.tofrom {
+    font-size: 150%
+}
+
+#cardauctiontable td.auction-self-matched {
+    background-color: rgba(255, 255, 0, .4)
+}
+
+#cardauctiontable td.auction-self-unmatched {
+    background-color: rgba(0, 0, 0, .067)
+}
+
+#cardauctiontable td.auction-self-price p {
+    cursor: pointer
+}
+
+#cardauctiontable td.auction-self-price .cardprice {
+    border-bottom: 1px dashed #4f4ffe
+}
+
+#cardauctiontable td.auction-self-price:nth-child(2) .cardprice {
+    border-color: #fc3737
+}
+
+#edit_price {
+    margin: .4em 0
+}
+
+#remove_price_button {
+    float: left
+}
+
+#cardauctiontable td:nth-child(5) #remove_price_button {
+    float: right
+}
+
+#new_price_value {
+    width: 4em
+}
+
+#cardauctiontable tr.cardauctionhiddenrow {
+    display: none
+}
+
+#cardauctiontable td.cardauctionshowmorecell p {
+    text-align: left;
+    margin: .5em 1em;
+    padding: .4em
+}
+
+#cardauctiontable td.cardauctionshowmorecell:nth-child(1) p {
+    text-align: right
+}
+
+#toggleauctionlog {
+    font-size: 85%
+}
+
+#cardauctionoffertable {
+    margin: 1em auto;
+    border-spacing: 1em 0
+}
+
+#cardauctionoffertable th {
+    border: 2px solid #dadad2;
+    width: 50%;
+    color: #696;
+    cursor: pointer;
+    min-width: 16em
+}
+
+#cardauctionoffertable tbody {
+    display: none
+}
+
+#cardauctionoffertable.mode-sell tbody,
+#cardauctionoffertable.mode-buy tbody {
+    display: table-row-group
+}
+
+#cardauctionoffertable.mode-sell td:nth-child(2),
+#cardauctionoffertable.mode-buy td:nth-child(1),
+#cardauctionoffertable.mode-sell th:nth-child(2),
+#cardauctionoffertable.mode-buy th:nth-child(1) {
+    opacity: .25
+}
+
+#cardauctionoffertable th:hover {
+    background-color: #dadad2;
+    color: #fff;
+    opacity: 1 !important
+}
+
+#cardauctionoffertable.mode-sell thead th:nth-child(1),
+#cardauctionoffertable.mode-buy thead th:nth-child(2) {
+    background-color: #dadad2;
+    color: #fff
+}
+
+#cardauctionoffertable input.auctionbid {
+    text-align: center;
+    font-size: 125%;
+    max-width: 40%;
+    padding: .5em 0
+}
+
+#cardauctionoffertable td:nth-child(1) input.auctionbid {
+    color: #fc3737
+}
+
+#cardauctionoffertable td:nth-child(2) input.auctionbid {
+    color: #4f4ffe
+}
+
+#cardauctionoffertable td {
+    text-align: center;
+    vertical-align: top
+}
+
+#countdown-cardauction {
+    margin: 1em 0
+}
+
+#chart-container {
+    height: 300px
+}
+
+#sales-tax-advisory {
+    text-align: right
+}
+
+.auctiontradestable td:nth-child(3),
+.auctiontradestable td:nth-child(4) {
+    text-align: center
+}
+
+.auctionbidstable td:nth-child(3) {
+    text-align: center
+}
+
+.auctionslisttable,
+.auctionstopcardstable,
+.auctionsrecenttradestable td,
+.auctionstopdeckstable td,
+.deckscollectionstable {
+    text-align: center
+}
+
+.auctionslisttable td:nth-child(2),
+.auctionstopcardstable td:nth-child(3),
+.auctionsrecenttradestable td:nth-child(2),
+.auctionstopdeckstable td:nth-child(2) {
+    text-align: left
+}
+
+.auctiongiftbox {
+    font-size: 100%;
+    margin: 2em
+}
+
+.auctiongiftbox input[type=search] {
+    min-width: 14em
+}
+
+.decksnavmenu {
+    text-align: center;
+    color: #999
+}
+
+.decksnavitem {
+    display: inline-block;
+    margin: .6em
+}
+
+.numberslug {
+    background-color: #92928a;
+    padding: 0 .75em;
+    border-radius: 1em 0;
+    color: #fff;
+    font-size: 90%
+}
+
+.decksnavmenu .numberslug {
+    margin: 0 .5em
+}
+
+a:hover .numberslug {
+    background-color: #0c0
+}
+
+.collectionname {
+    display: inline-block
+}
+
+#editcollectiontable td:nth-child(2) p {
+    text-align: center
+}
+
+#editcollectiontable td:nth-child(3) p,
+#editcollectiontable2 td:nth-child(2) p {
+    text-align: center;
+    display: flex;
+    justify-content: center
+}
+
+#editcollectiontable td:nth-child(3) input[type=checkbox],
+#editcollectiontable2 td:nth-child(2) input[type=checkbox] {
+    zoom: 1.8;
+    margin: 0 .6em
+}
+
+#editcollectiontable td:nth-child(3) input[type=number],
+#editcollectiontable2 td:nth-child(2) input[type=number] {
+    text-align: center;
+    width: 4em
+}
+
+.minicard {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    width: 74px;
+    height: 23px;
+    margin-right: .5em;
+    box-shadow: 0 2px 4px #bbb
+}
+
+a:hover .minicard {
+    box-shadow: 0 2px 4px #999
+}
+
+.minicard-flag {
+    height: 80%;
+    width: 100%;
+    display: inline-block;
+    background-size: cover;
+    background-position: center;
+    border-radius: 3px 3px 0 0;
+    position: relative
+}
+
+.minicard-category {
+    display: inline-block;
+    font-size: 6px;
+    text-align: center;
+    overflow: hidden;
+    color: #fff;
+    border-radius: 0 0 2px 2px
+}
+
+.minicard-season-number {
+    position: absolute;
+    color: #fff;
+    font-weight: 700;
+    background: red;
+    padding: 2px 4px;
+    font-size: 55%;
+    right: 0;
+    top: 0;
+    border-radius: 0 3px 0 0
+}
+
+.deckcard-season-card-list .deckcard-token {
+    display: none
+}
+
+.deckcard-season-card-list .seasons-title {
+    font-variant: small-caps
+}
+
+.deckcard-season-list-card {
+    margin: 1em
+}
+
+.deckcard-season-list-card-selected {
+    border: 1px solid #cacac0;
+    padding: .5em .5em .75em;
+    border-radius: 3px
+}
+
+.deckcard-season-list-card .minicard {
+    margin-right: 0
+}
+
+.manage_collections_button {
+    margin-left: 1em;
+    font-size: 80%
+}
+
+.deckcard-filters {
+    text-align: center;
+    margin: 1em 0
+}
+
+.deckcard-filters-title {
+    font-size: 80%;
+    color: #666
+}
+
+.deckcard-filters a.deckcard-token:hover {
+    text-decoration: none
+}
+
+.deckcard-filters a.deckcard-token {
+    color: #444;
+    display: inline-block
+}
+
+.deckcard-filters .deckcard-token {
+    margin: .3em
+}
+
+.deckcard-filters .deckcard-token.deckcard-season-season-1 {
+    background: #ffdfdf
+}
+
+.deckcard-filters .deckcard-token.deckcard-season-season-2 {
+    background: #dff0ff
+}
+
+.deckcard-filters .deckcard-token.selected {
+    border-color: #444;
+    font-weight: 700;
+    border-width: 2px
+}
+
+.deckcard-filters .deckcard-token.unselected:hover {
+    border-color: #444
+}
+
+.deckcard-season-2 {
+    border-radius: 3px
+}
+
+.deckcard-season-2 figure {
+    width: 100%
+}
+
+.deckcard-season-2 figure.front,
+.deckcard-season-2 figure.back {
+    border-radius: 3px;
+    box-shadow: 1px 1px 4px #aaa;
+    padding: 0 2.5%
+}
+
+.deckcard-season-2 figure.deckcard-category-common {
+    background: linear-gradient(112deg, #b1b1b1 0%, #9b9b9b 100%)
+}
+
+.deckcard-season-2 figure.deckcard-category-uncommon {
+    background: linear-gradient(112deg, #81be8b 0%, #6ca877 100%)
+}
+
+.deckcard-season-2 figure.deckcard-category-rare {
+    background: linear-gradient(112deg, #83b1c1 0%, #6996a6 100%)
+}
+
+.deckcard-season-2 figure.deckcard-category-ultra-rare {
+    background: linear-gradient(112deg, #b58bc9 0%, #8a629d 100%)
+}
+
+.deckcard-season-2 figure.deckcard-category-epic {
+    background: linear-gradient(112deg, #d6b97a 0%, #a98e52 100%)
+}
+
+.deckcard-season-2 figure.deckcard-category-legendary {
+    background: linear-gradient(112deg, #e5bd45 0%, #aa8800 100%)
+}
+
+.deckcard-season-2 .deckcard-info {
+    border-radius: 0;
+    z-index: 2;
+    margin-left: 3%;
+    height: 50%;
+    margin-top: 31%;
+    width: 94%
+}
+
+.deckcard-season-2 .deckcard-info-cardnumber {
+    font-size: 80%;
+    text-align: center;
+    margin-left: 0
+}
+
+.deckcard-season-2 .deckcard-category {
+    position: absolute;
+    width: 95%;
+    top: 0;
+    font-size: 75%;
+    text-align: center;
+    font-weight: 700;
+    padding: 1px 5px 4px 0;
+    letter-spacing: 12px;
+    text-indent: 12px;
+    font-style: normal;
+    background: 0 0
+}
+
+.deckcard-season-2 .deckcard-category-common .deckcard-category {
+    letter-spacing: 6px;
+    text-indent: 6px;
+    color: #ddd
+}
+
+.deckcard-season-2 .deckcard-category-uncommon .deckcard-category {
+    letter-spacing: 8px;
+    text-indent: 8px
+}
+
+.deckcard-season-2 .deckcard-category-rare .deckcard-category {
+    text-shadow: 0 0 10px #fff
+}
+
+.deckcard-season-2 .deckcard-category-ultra-rare .deckcard-category {
+    text-shadow: 0 0 10px #fff
+}
+
+.deckcard-season-2 .deckcard-category-epic .deckcard-category {
+    text-shadow: 0 0 6px #fff
+}
+
+.deckcard-season-2 .deckcard-category-legendary .deckcard-category {
+    text-shadow: 0 0 6px #fff;
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.5) 0%, transparent 60%)
+}
+
+.deckcard-season-2 .deckcard-stripe {
+    background-color: none;
+    background: 0 0
+}
+
+.deckcard-season-2 .deckcard-stripe .deckcard-season {
+    white-space: nowrap;
+    min-width: 6.5em
+}
+
+.deckcard-season-2 .deckcard-stripe .deckcard-region {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 90%;
+    color: #fff
+}
+
+.deckcard-season-2 .deckcard-flag {
+    margin-top: 6%;
+    height: 62%;
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 0 72px #000 inset;
+    border-radius: 0
+}
+
+.deckcard-season-2 .deckcard-title {
+    position: absolute;
+    top: 8%;
+    left: 5%;
+    width: 89%;
+    background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.35) 100%);
+    border: 1px solid rgba(0, 0, 0, .3);
+    margin: 0;
+    padding: 6px 0 8px
+}
+
+.deckcard-season-2 .deckcard-title p {
+    color: #eee;
+    max-width: 100%
+}
+
+.deckcard-season-1 .nameblock {
+    color: green;
+}
+
+.deckcard-season-2 .deckcard-title .nameblock .nnameblock {
+    max-width: 100%
+}
+
+.deckcard-season-2 .deckcard-title .nameblock .nnameblock .ntype {
+    font-size: 75%
+}
+
+.deckcard-season-2 .deckcard-title .nameblock .nnameblock .nname {
+    font-size: 130%
+}
+
+.deckcard-season-2 .deckcard-category-epic .deckcard-title .nameblock {
+    text-shadow: 0 0 10px rgba(255, 255, 255, .7)
+}
+
+.deckcard-season-2 .deckcard-category-legendary .deckcard-title .nameblock {
+    text-shadow: 0 0 8px rgba(255, 255, 255, .7)
+}
+
+.deckcard-season-2 .deckcard-lower {
+    background: rgba(0, 0, 0, .7);
+    box-shadow: 0 0 2em #000 inset;
+    height: 28.5%;
+    overflow: hidden
+}
+
+.deckcard-season-2 .deckcard-govt {
+    border-top: none;
+    border-bottom: none;
+    color: #ccc
+}
+
+.deckcard-season-2 .deckcard-slogan {
+    color: #fff;
+    margin: 0;
+    padding: 9px 6px
+}
+
+.deckcard-season-2 .deckcard-badges #trophycabinet img.trophy,
+.deckcard-season-2 .deckcard-badges .specialbadges img {
+    max-width: 28px;
+    filter: brightness(.85)
+}
+
+.deckcard-season-2 .deckcard-badges {
+    filter: saturate(.8)
+}
+
+.deckcard-season-2 .deckcard-desc {
+    position: absolute;
+    bottom: 34.5%;
+    color: #eee;
+    margin: 0;
+    padding: 0;
+    border: none;
+    box-shadow: none;
+    background: 0 0;
+    display: flex;
+    flex-direction: row-reverse;
+    width: 89%;
+    justify-content: space-between;
+    margin-left: 3%
+}
+
+.deckcard-season-2 .deckcard-desc-bit {
+    background: rgba(0, 0, 0, .4);
+    margin: 2px 0;
+    padding: 2px;
+    border: none;
+    box-shadow: none
+}
+
+.deckcard-season-2 .deckcard-desc .pop-units {
+    text-transform: uppercase;
+    margin-left: 1px
+}
+
+.deckcard-season-2 .deckcard-stripe {
+    width: 96%;
+    align-items: flex-end;
+    justify-content: space-evenly;
+    border-radius: 0;
+    padding-bottom: 5px
+}
+
+.minicard-season-2 .minicard-season-number {
+    background: #00a5ff
+}
+
+.minicard-season-3 .minicard-season-number {
+    background: #dfb73e
+}
+
+.deckcard-filters .deckcard-token.deckcard-season-season-3 {
+    background: #fff1c5
+}
+
+.deckcard-season-3.flipped .s3-content {
+    pointer-events: none
+}
+
+.deckcard-season-3 .s3-content {
+    position: relative;
+    margin-left: 0;
+    height: 100%;
+    filter: drop-shadow(0.1em 0.1em 0.1em black);
+    display: flex;
+    flex-direction: column;
+    font-size: 50%
+}
+
+.deckcard-season-3 .s3-flagbox {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    border-radius: 3px
+}
+
+.deckcard-season-3 .s3-flag {
+    width: 100%;
+    height: 90%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow: hidden
+}
+
+.deckcard-season-3 .s3-flag-image {
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    background-position: center
+}
+
+.deckcard-season-3 .s3-slogan {
+    display: inline-block;
+    position: relative;
+    min-height: 1em;
+    border-radius: 0 0 .2em 0;
+    padding: .25em 2.5em;
+    margin-right: 1px;
+    color: #fff;
+    font-family: Garamond, Georgia, serif;
+    font-size: 175%;
+    font-style: italic;
+    word-break: break-word;
+    box-shadow: 1px 1px 2px rgb(0 0 0/40%)
+}
+
+.deckcard-season-3 .deckcard-name {
+    word-break: break-word;
+    overflow-x: clip
+}
+
+.deckcard-season-3 .nameblock {
+    position: relative;
+    z-index: 3;
+    margin: 1em 1em .8em 2em;
+    color: #fff;
+    text-shadow: 0 0 .1em #fff, 1px 1px .1em #000, -1px -1px .2em #000;
+    line-height: 1
+}
+
+.deckcard-season-3 .nameblock .nnameblock .ntype {
+    font-size: 160%;
+    margin-bottom: .25em;
+    letter-spacing: 2px;
+    opacity: .8;
+    text-shadow: 0 0 0 #fff, 1px 1px 1px #000, 0 0 3px #000
+}
+
+.deckcard-season-3 .nameblock .nnameblock .nname {
+    font-size: 4em;
+    font-weight: 700;
+    filter: drop-shadow(1px 1px 1px black) drop-shadow(1px 1px 1px black)
+}
+
+.deckcard-season-3 a.nlink.nameblock:hover span.nnameblock,
+.deckcard-season-3 a.nlink.nameblock:hover .ntype {
+    text-decoration: none
+}
+
+.deckcard-season-3 .s3-slogan:before,
+.deckcard-season-3 .s3-slogan:after {
+    position: absolute;
+    font-size: 2em;
+    opacity: .4
+}
+
+.deckcard-season-3 .s3-slogan:before {
+    content: "\201C";
+    left: .6em;
+    top: 0
+}
+
+.deckcard-season-3 .s3-slogan:after {
+    content: "\201D";
+    bottom: .1em;
+    right: .75em;
+    line-height: 0
+}
+
+.deckcard-season-3 .s3-mid {
+    margin-top: auto
+}
+
+.deckcard-season-3 .deckcard-badges {
+    width: 100%;
+    font-size: 180%;
+    filter: brightness(.9);
+    display: grid;
+    grid-template-areas: "left right" "bottom bottom"
+}
+
+.deckcard-season-3 .role-badges {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+    grid-area: right
+}
+
+.deckcard-season-3 #wabadges {
+    grid-area: left;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start
+}
+
+.deckcard-season-3 .trophies {
+    display: flex;
+    flex-wrap: wrap;
+    grid-area: bottom
+}
+
+.deckcard-season-3 .deckcard-badges #trophycabinet img.trophy,
+.deckcard-season-3 .deckcard-badges .specialbadges img {
+    max-width: 28px
+}
+
+.deckcard-season-3 .s3-lower {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: .5em;
+    padding: 0 0 1.8em;
+    font-size: 125%
+}
+
+.deckcard-season-3 .s3-lower:before {
+    content: '';
+    background: #fff;
+    filter: blur(0.2em);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    clip-path: polygon(0 -50%, 100% -50%, 100% 100%, 0% 100%)
+}
+
+.deckcard-season-3 .s3-lower:after {
+    content: '20 Years 20 Years 20 Years 20 Years 20 Years 20 Years 20 Years 20 Years 20 Years 20 Years 20 Years 20 Years 20 Years 20 Years 20 Years 20 Years 20 Years 20 Years 20 Years Hi Mom 20 Years 20 Years';
+    font-size: 90%;
+    color: #000;
+    position: absolute;
+    left: .5em;
+    top: 0;
+    opacity: .05
+}
+
+.deckcard-season-3 .deckcard-category {
+    z-index: 10;
+    font-style: normal;
+    padding: .4em 2em 0 .8em;
+    font-size: .85em;
+    text-shadow: none;
+    letter-spacing: 1px;
+    clip-path: polygon(0 0, 80% 0%, 100% 100%, 0% 100%)
+}
+
+.deckcard-season-3 .deckcard-category-common .deckcard-category {
+    background: #9e9e9e
+}
+
+.deckcard-season-3 .deckcard-category-uncommon .deckcard-category {
+    background: #00aa4c
+}
+
+.deckcard-season-3 .deckcard-category-rare .deckcard-category {
+    background: #008ec1
+}
+
+.deckcard-season-3 .deckcard-category-ultra-rare .deckcard-category {
+    background: #ac00e6
+}
+
+.deckcard-season-3 .deckcard-category-epic .deckcard-category {
+    background: #db9e1c
+}
+
+.deckcard-season-3 .deckcard-category-legendary .deckcard-category {
+    background: #e7c800
+}
+
+.deckcard-season-3 .deckcard-season {
+    margin-left: .6em;
+    white-space: nowrap
+}
+
+.deckcard-season-3 .deckcard-lower-collection {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 0
+}
+
+.deckcard-season-3 .deckcard-govt-collection {
+    justify-content: flex-end
+}
+
+.deckcard-season-3 .deckcard-govt {
+    color: #444;
+    border: 0;
+    font-size: 1em;
+    margin-right: .3em
+}
+
+.deckcard-season-3 .deckcard-desc-bit {
+    color: #444;
+    text-transform: uppercase;
+    margin-left: .8em;
+    margin-right: .4em
+}
+
+.deckcard-season-3 .deckcard-stripe {
+    line-height: 1.5em;
+    font-size: 1.4em;
+    z-index: 6;
+    color: #fff
+}
+
+.deckcard-season-3 .deckcard-region {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
+.deckcard-season-3 .deckcard-info {
+    font-size: 200%;
+    background: 0 0;
+    justify-content: center;
+    border-radius: 3px;
+    height: auto;
+    top: 25%;
+    z-index: 3
+}
+
+.deckcard-season-3 figure .deckcard-info .deckcard-info-content {
+    display: block;
+    background: #000;
+    border: 1px solid #444;
+    filter: drop-shadow(0 0 1em rgba(0, 0, 0, 0.4));
+    padding: 1em 0;
+    width: 110%;
+    margin-left: -5%
+}
+
+.deckcard-season-3 .deckcard-info-cardnumber {
+    text-align: center
+}
+
+.deckcard-season-3 .deckcard-info-topline {
+    margin-top: 6em
+}
+
+.deckcard-season-3 .deckcard-info-cardlink {
+    margin: 2.5em 1em
+}
+
+.deckcard-season-3 figure.front:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    box-shadow: 0 0 .8em rgba(0, 0, 0, .5) inset
+}
+
+.deckcard-season-3 .deckcard-category-common .deckcard-stripe,
+.deckcard-season-3 .deckcard-category-common .s3-slogan {
+    background: #9e9e9e
+}
+
+.deckcard-season-3 .deckcard-category-uncommon .deckcard-stripe,
+.deckcard-season-3 .deckcard-category-uncommon .s3-slogan {
+    background: #00aa4c
+}
+
+.deckcard-season-3 .deckcard-category-rare .deckcard-stripe,
+.deckcard-season-3 .deckcard-category-rare .s3-slogan {
+    background: #008ec1
+}
+
+.deckcard-season-3 .deckcard-category-ultra-rare .deckcard-stripe,
+.deckcard-season-3 .deckcard-category-ultra-rare .s3-slogan {
+    background: #ac00e6
+}
+
+.deckcard-season-3 .deckcard-category-epic .deckcard-stripe,
+.deckcard-season-3 .deckcard-category-epic .s3-slogan {
+    background: #db9e1c
+}
+
+.deckcard-season-3 .deckcard-category-legendary .deckcard-stripe,
+.deckcard-season-3 .deckcard-category-legendary .s3-slogan {
+    background: #e7c820
+}
+
+body {
+    margin: 0;
+    font-size: 10pt;
+    font-family: helvetica neue, Verdana, Tahoma, sans-serif
+}
+.deckcard {
+    background-color: #fff;
+}
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #000;
+      --foreground-rgb: 255, 255, 255;
+      --background-start-rgb: 0, 0, 0;
+      --background-end-rgb: 0, 0, 0;
+    }
+    .deckcard-season-2 {
+        background-color: transparent;
+    }
+  }
+
+img {
+    border: 0
+}
+
+a img.smallflag,
+a img.miniflag {
+    transition: filter .25s ease-out
+}
+
+a:hover img.smallflag,
+a:hover img.miniflag {
+    transition: filter .1s ease-out
+}
+
+a:link img,
+a:visited img {
+    border-color: green
+}
+
+a:active img,
+a:hover img {
+    border-color: #0c0
+}
+
+a.silentlink img,
+a.silentlink:hover img {
+    border-color: inherit
+}
+
+a.nlink:hover {
+    text-decoration: none
+}
+
+a.nlink:hover span {
+    text-decoration: underline
+}
+
+a.rlink {
+    color: #803000
+}
+
+a.rlink:hover {
+    color: #909033
+}
+
+a.button,
+.button {
+    color: #000
+}
+
+#main {
+    float: right;
+    width: 100%;
+    margin-left: -200px;
+    background-color: #eaeae2;
+    position: relative;
+    z-index: 0
+}
+
+button:disabled,
+button:disabled:hover {
+    color: #ccc !important;
+    background-image: none !important;
+    background-color: #f4f4f4 !important;
+    text-shadow: none !important;
+    border-color: #d4d4d4 !important
+}
+
+.error {
+    color: #f33;
+    border: solid 2px #c66;
+    border-radius: 12px;
+    padding: 1em;
+    margin: .5em;
+    margin-right: 25%
+}
+
+img.icon {
+    vertical-align: middle;
+    margin-right: 6px
+}
+
+img.exlink {
+    vertical-align: middle;
+    padding-right: 2px
+}
+
+img.badge {
+    vertical-align: middle;
+    padding-right: 4px;
+    margin: 0;
+    box-shadow: none !important
+}
+
+img.scbadge {
+    vertical-align: middle;
+    padding-right: 4px;
+    margin: 0;
+    box-shadow: none !important;
+    width: 80px
+}
+
+a.nameblock {
+    display: inline-flex;
+    align-items: center
+}
+
+.nameblock .nnameblock .ntype,
+.nameblock .nnameblock .nname {
+    display: block
+}
+
+.nameblock .nnameblock .nname {
+    font-size: 110%
+}
+
+.nameblock .nnameblock .ntype {
+    font-size: 85%
+}
+
+.trophy {
+    vertical-align: middle
+}
+
+
+.badge {
+    display: inline-block
+}
+
+.mod_status,
+.semimod_status,
+.mentor_status,
+.wa_status,
+.class_status {
+    display: inline-block;
+    border: 3px outset #900;
+    text-shadow: 1px 1px 1px #333;
+    color: #fff;
+    background-color: #900;
+    font-size: 11pt;
+    padding-left: 8px;
+    padding-right: 8px;
+    box-shadow: 1px 1px 2px #433;
+    font-family: Impact, Arial, sans-serif
+}
+
+.semimod_status {
+    background-color: #aa9030;
+    border-color: #aa9030;
+    background-image: url(https://www.nationstates.net/images/issues_editor_bg.png);
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 28px
+}
+
+.mentor_status {
+    background-color: #3c6;
+    border-color: #3c6;
+    background-image: url(https://www.nationstates.net/images/rp_mentor_bg.png);
+    background-repeat: no-repeat;
+    background-position: left center;
+    padding-left: 24px
+}
+
+.wa_status {
+    border-color: #494;
+    background-color: green;
+    box-shadow: 1px 1px 2px #343
+}
+
+.class_status,
+.wasg_ret_status {
+    background-color: #aaaa90;
+    border-color: #ccc
+}
+
+#trophycabinet {
+    float: right;
+    clear: right;
+    margin-top: 8px
+}
+
+select.button:active,
+select.button.active,
+select.button:focus,
+select.button.focus {
+    background-color: #747474
+}
