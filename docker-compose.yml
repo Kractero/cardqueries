@@ -1,0 +1,90 @@
+version: "3.9"
+services:
+    # spun down and up often
+    portainer:
+        container_name: portainer
+        restart: unless-stopped
+        volumes:
+            - /etc/localtime:/etc/localtime:ro
+            - /var/run/docker.sock:/var/run/docker.sock
+            - ./portainer/data:/data
+        image: portainer/portainer-ce:latest
+        security_opt:
+            - no-new-privileges:true
+    # make nginx easier
+    nginxproxymanager:
+      image: 'jc21/nginx-proxy-manager:latest'
+      restart: unless-stopped
+      ports:
+        - '80:80'
+        - '443:443'
+      container_name: nginx_proxy_manager
+      volumes:
+        - ./npm/data:/data
+        - ./npm/letsencrypt:/etc/letsencrypt
+    web:
+      build:
+        context: ./frontend
+        dockerfile: NextJSDockerfile
+      container_name: CardQueries
+      restart: always
+      command: npm run start
+      volumes:
+        - ./frontend:/app
+        - /app/node_modules
+        - /app/.next
+    backend:
+      build:
+        context: ./backend
+        dockerfile: FastAPIDockerfile
+      volumes:
+        - ./backend:/usr/src/app
+      container_name: CardQueriesAPI
+      environment:
+        DATABASE_URL: ${DATABASE_URL}
+        REDISHOST: ${REDISHOST}
+        REDISPORT: ${REDISPORT}
+        REDIS_URL: ${REDIS_URL}
+      depends_on:
+        - db
+        - cache
+      links:
+        - db
+        - cache
+    db:
+      image: postgres:14
+      restart: always
+      container_name: CardQueriesDB
+      environment:
+        POSTGRES_USER: ${DATABASE_USER}
+        POSTGRES_DB: ${DATABASE_NAME}
+        POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      volumes:
+        - pgdata:/var/lib/postgresql/data
+    cache:
+      restart: always
+      image: redis:alpine
+      container_name: CardQueriesCache
+      volumes:
+        - redis:/data
+    # at some point
+#    caddy:
+#      image: caddy:latest
+#      restart: unless-stopped
+#      container_name: caddy
+#      ports:
+#        - 80:80
+#        - 443:443
+#      volumes:
+#        - ./caddy/Caddyfile:/etc/caddy/Caddyfile
+#        - ./caddy/site:/srv
+#        - ./caddy/caddy_data:/data
+#        - ./caddy/caddy_config:/config
+
+volumes:
+  # caddy_data:
+  #   external: true
+  # caddy_config:
+  pgdata:
+    external: true
+  redis:
