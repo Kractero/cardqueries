@@ -154,7 +154,13 @@ async def index(
                                     else:
                                         formatted_words.append(word[0] + word[1].capitalize() + word[2:])
                                 else:
-                                    formatted_words.append(word.upper())
+                                    if '-' not in word:
+                                        format_or_badges.append(f"{word.upper()}-1")
+                                        format_or_badges.append(f"{word.upper()}-5")
+                                        format_or_badges.append(f"{word.upper()}-10")
+                                    else:
+                                        formatted_words.append(word.upper())
+                                        format_or_badges.append(' '.join(formatted_words))
                             format_or_badges.append(' '.join(formatted_words))
                         format_and_badges = []
                         for badge in and_badges:
@@ -166,8 +172,13 @@ async def index(
                                     else:
                                         formatted_words.append(word[0] + word[1].capitalize())
                                 else:
-                                    formatted_words.append(word.upper())
-                            format_and_badges.append(' '.join(formatted_words))
+                                    if '-' not in word:
+                                        format_or_badges.append(f"{word.upper()}-1")
+                                        format_or_badges.append(f"{word.upper()}-5")
+                                        format_or_badges.append(f"{word.upper()}-10")
+                                    else:
+                                        formatted_words.append(word.upper())
+                                        format_and_badges.append(' '.join(formatted_words))
                         if 'sqlite' in os.environ['DATABASE_URL']:
                             or_badges_queries = [~(getattr(models.Card, param)[badge[1:]]) if badge.startswith('!') else getattr(models.Card, param)[badge] for badge in format_or_badges]
                             and_badges_queries = [~(getattr(models.Card, param)[badge[1:]]) if badge.startswith('!') else getattr(models.Card, param)[badge] for badge in format_and_badges]
