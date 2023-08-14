@@ -82,7 +82,7 @@ async def health_check():
     return {"status": "healthy"}
 
 ALLOWED_PARAMS = {
-    "season", "type", "name", "motto", "category", "region",
+    "season", "type", "name", "motto", "category", "region", "deck", "collection",
     "flag", "cardcategory", "badges", "trophies", "mode", "rarity", "exnation"
 }
 
