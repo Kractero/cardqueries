@@ -48,6 +48,12 @@ services:
       depends_on:
         - db
         - cache
+      restart: always
+      healthcheck:
+        test: ["CMD", "curl", "--fail", "-s", "-o", "/dev/null", "https://api.sideroca.com/health"]
+        interval: 60s
+        timeout: 10s
+        retries: 3
       links:
         - db
         - cache
@@ -67,6 +73,13 @@ services:
       container_name: CardQueriesCache
       volumes:
         - redis:/data
+    autoheal:
+      restart: always
+      image: willfarrell/autoheal
+      environment:
+        - AUTOHEAL_CONTAINER_LABEL=all
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
     # at some point
 #    caddy:
 #      image: caddy:latest
