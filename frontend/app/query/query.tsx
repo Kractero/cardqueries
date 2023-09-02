@@ -222,12 +222,12 @@ export function Query() {
                         let inCollection = undefined;
                         if (collectionCards.length > 0) {
                             inCollection = collectionCards.some(
-                                (collectionCard: { CARDID: any }) => collectionCard.CARDID === Number(nation.id)
+                                (collectionCard: { CARDID: any, SEASON: any }) => collectionCard.CARDID === Number(nation.id) && collectionCard.SEASON === nation.season
                             );
                         }
                         if (deckCards.length > 0) {
                             inCollection = deckCards.some(
-                                (collectionCard: { CARDID: any }) => collectionCard.CARDID === Number(nation.id)
+                                (collectionCard: { CARDID: any, SEASON: any }) => collectionCard.CARDID === Number(nation.id) && collectionCard.SEASON === nation.season
                             );
                         }
                         return { ...nation, inCollection };
