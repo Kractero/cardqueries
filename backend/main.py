@@ -212,7 +212,7 @@ async def index(
                     *and_badges_queries if and_badges_queries is not None else True,
             )
 
-            if (season is not None or (cardcategory is not None and cardcategory != 'legendary')) and all(value is None for value in (name, type, motto, category, region, flag, badges, trophies)):
+            if all(value is None for value in (name, type, motto, category, region, flag, badges, trophies, cardcategory)) and season is not None:
                 mode = "names"
             
             if (mode is not None and mode == "names"):
