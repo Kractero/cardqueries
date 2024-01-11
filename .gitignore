@@ -40,3 +40,13 @@ venv
 backend/cards.db
 .env
 .rdb
+
+# server
+npm
+portainer
+
+# api test
+.bruno
+
+#glances
+glances.pwd

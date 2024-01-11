@@ -93,6 +93,22 @@ services:
 #        - ./caddy/site:/srv
 #        - ./caddy/caddy_data:/data
 #        - ./caddy/caddy_config:/config
+    glances:
+      image: nicolargo/glances:latest-full
+      pid: host
+      container_name: glances
+      volumes:
+        - /:/rootfs:ro
+        - /var/run/docker.sock:/var/run/docker.sock
+      environment:
+        - GLANCES_OPT=-w --password
+      secrets:
+      - source: glances_password
+        target: /root/.config/glances/glances.pwd
+
+secrets:
+  glances_password:
+    file: ./glances.pwd
 
 volumes:
   # caddy_data:
