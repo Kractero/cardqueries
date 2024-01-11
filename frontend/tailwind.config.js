@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  darkMode: ["class", "class~='dark'"],
+  darkMode: ["class"],
   content: [
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
@@ -8,6 +8,7 @@ module.exports = {
     './src/**/*.{ts,tsx}',
 	],
   safelist: ["dark"],
+  plugins: [require('@tailwindcss/typography')],
   theme: {
     container: {
       center: true,

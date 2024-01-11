@@ -1,0 +1,154 @@
+import { Button } from "@/components/ui/button";
+import { Home, Paperclip } from "lucide-react";
+import Link from "next/link";
+
+This serves as the frontend for an API built with FastAPI, a powerful Python library for creating fast APIs. Our API provides access to data stored in PostgreSQL dumps.
+While the frontend offers a user-friendly interface, I acknowledge that manual query building currently provides more extensive access to the data.
+
+The API primarily serves as a card query facilitator. It enables users to retrieve card-related information through
+various queries. However, specific features related to collections and decks are handled exclusively on the frontend.
+These functionalities rely on making API calls to NationStates, and to mitigate potential rate-limiting issues, I have
+chosen to keep these operations on the client-side.
+
+
+# Interface
+
+The exclamation button (!) is used to negate queries. When you add the exclamation symbol before a field or parameter,
+the interface will perform a negated query, which means it will return results that do not match the specified condition.
+The plus button (+) allows you to add additional fields to your queries. When you click on the plus button, it opens up
+a menu of available fields that you can include in your query.
+
+At the top of the interface, you will find a button that allows you to switch between the /cards and /collection routes.
+When you switch between the routes, the interface will adapt to display the relevant options and functionalities specific to that route.
+On the /cards route, you have the option to select between Collection and Deck, which is a mutually exclusive choice.
+
+For users who are comfortable with manual query building, you have the option to construct your own custom query. At the top of the interface,
+there is an input area where you can specify the parameters for your query. When building, leave out the route. For example, do
+nation=testlandia instead of /cards?nation=testlandia.
+
+# API
+
+## /cards
+
+The main route and probably the one you want.
+
+### Sample Queries
+
+```
+/cards?cardcategory=rare&category=authoritarian_democracy,civil_rights_lovefest
+```
+Gets all rare cards that are authoritiarian democracies or civil rights lovefests.
+
+```
+/cards?trophies=civil_rights-1&badge=admin
+```
+Gets all nations with a 1% civil rights badge that are administrators.
+
+```
+/cards?season=1&region=the_burning_legion&deck=Kractero
+```
+Gets all season 1 cards from the region The Burning Legion, matched against the deck of Kractero.
+
+### General Format
+
+All lower case, replace spaces with underscores.
+Separate multiple values for the same parameter with commas.
+
+### Return Mode
+
+Only possible parameter is names. Will return a stripped down JSON, way lighter on resources.
+
+### Excluding Parameters
+
+You can exclude certain parameters from the query by simply not including them. However, this does not mean you are searching for nations without those fields.
+
+To explicitly exclude them, you can use an exclamation mark before the parameter (e.g., category=!anarchy).
+<span style={{textDecoration: 'line-through',}}>Trophies and badges are special as they support full exclusion searching. You can use the keyword sans to find nations
+without trophies (e.g., trophies=sans).</span>
+
+<h3 style={{textDecoration: 'line-through',}}>Partial and Exact Matching</h3>
+
+<span style={{textDecoration: 'line-through',}}>For some parameters, you can perform both partial and exact matching.
+These parameters include name, nation manual, type, region, and motto. By default, they perform partial matching.</span>
+
+<span style={{textDecoration: 'line-through',}}>To match exactly, you can use double equal signs (e.g., name==Giovanni matches Giovanni exactly).
+You can also use the != operator to ignore a specific value (e.g., name=!=Giovanni ignores the nation named Giovanni).</span>
+
+### Exact Matching
+
+Certain parameters require exact matching. These parameters include flag, cardcategory (rarity), and WA category.
+When using these parameters, the values must match exactly to find the desired nations.
+
+<h3 style={{textDecoration: 'line-through',}}>Variable Parameters</h3>
+
+<span style={{textDecoration: 'line-through',}}>Trophies and badges support variable matching. By default, separating values with commas performs an and match,
+while separating values with a vertical bar (|) performs an or match. This allows you to search for nations based on different trophy or badge combinations.</span>
+
+### Exposed Parameters
+
+<Link className="font-semibold my-4 flex" href={"/docs/parameters"}>
+    <Paperclip />
+    List of Valid Parameters
+</Link>
+
+All parameters can be nulled.
+
+- Deck - takes a nation name
+
+  - When you pass the deck parameter in the cards route, the API will match the returned cards against the specified decks,
+  - indicating whether each card is included within them. Mutually exclusive with deck.
+
+- Collection - takes an ID
+
+  - When you pass the collection parameter in the cards route, the API will match the returned cards against the specified collections,
+                        indicating whether each card is included within them. Mutually exclusive with collection.
+
+- Mode - return type
+- Season
+  - Format season=1, season=2, season=3
+
+- Trophies - WA Census Ranking, 1t means #1, 1 1%, 5 5%, 10 10%
+  - Format: trophies=happy-1t
+
+- Badges
+  - Format: badges=admin
+
+- Category - WA Government categories
+  - Format: category=anarchy
+
+- Cardcategory (rarity)
+  - Format: cardcategory=rare
+
+- Region
+  - Format: region=the_burning_legion
+
+- Exnation (s1 meaning)
+  - Format: exnation
+
+- Flag
+  - Format: flag=afghanistan
+
+- Motto - Searches motto text
+  - Format: motto=lion
+
+- Name - Nation names
+  - Format: name=koem
+
+- Type - the manually changeable government type
+
+  - Format: type=kingdom
+
+## /collection
+
+A secondary route, the purpose of this route is to take one or multiple collections, and compare it against the cards in your deck. Essentially this returns all cards in your deck that are not in active collections. This only really works with the interface, as the interface provides the valid structure this route accepts.
+
+### Exposed Parameters
+
+- Deck - takes a deck name, provide additional ones with commas
+
+- Collection - takes collection ids, provide additional ones with commas
+
+```
+/collection?collection=3293,67193&deck=Kractero
+```
+Collects cards from the 3293 and 67193 collection, then returns all the cards from Kractero's Deck that are not included within those collections.
