@@ -115,9 +115,6 @@ async def index(
             detail = f"Invalid query parameter(s): {', '.join(invalid_params)}"
             raise HTTPException(status_code=status_code, detail=detail)
 
-        if rarity:
-            cardcategory = rarity
-
         if set(request.query_params.keys()) == {"deck"} or set(request.query_params.keys()) == {"collection"}:
             return {"cards": []}
         if all(value is None for value in request.query_params.keys()):
@@ -126,79 +123,45 @@ async def index(
         if cached_response:
             return json.loads(cached_response)
         else:
-            sans_queries = []
-            or_badges_queries = []
             and_badges_queries = []
             match_queries = []
             for param in request.query_params:
                 if (param in ('badges', 'trophies')):
                     value = request.query_params[param]
                     values = value.split(",") if value else []
-                    if len(values) == 1 and "sans" in values:
-                        sans_queries.append(getattr(models.Card, param) == {})
+
+                    format_and_badges = []
+                    for badge in values:
+                        formatted_words = []
+                        for word in badge.split('_'):
+                            if param == 'badges':
+                                if word[0].isalpha():
+                                    formatted_words.append(word.capitalize())
+                                else:
+                                    formatted_words.append(word[0] + word[1].capitalize())
+                            else:
+                                if '-' not in word:
+                                    format_and_badges.append(f"{word.upper()}-1")
+                                    format_and_badges.append(f"{word.upper()}-5")
+                                    format_and_badges.append(f"{word.upper()}-10")
+                                else:
+                                    formatted_words.append(word.upper())
+
+                        if formatted_words:
+                            format_and_badges.append(' '.join(formatted_words))
+
+                    if 'sqlite' in os.environ['DATABASE_URL']:
+                        and_badges_queries = [~(getattr(models.Card, param)[badge[1:]]) if badge.startswith('!') else getattr(models.Card, param)[badge] for badge in format_and_badges]
                     else:
-                        or_badges = []
-                        and_badges = []
-                        for value in values:
-                            elements = value.split("|")
-                            if len(values) == 1:
-                                or_badges.extend(elements)
-                                break
-                            and_badges.append(elements[0])
-                            if len(elements) > 1:
-                                or_badges.append(elements[1])
-                        format_or_badges = []
-                        for badge in or_badges:
-                            formatted_words = []
-                            for word in badge.split('_'):
-                                if param == 'badges':
-                                    if word[0].isalpha():
-                                        formatted_words.append(word.capitalize())
-                                    else:
-                                        formatted_words.append(word[0] + word[1].capitalize() + word[2:])
-                                else:
-                                    if '-' not in word:
-                                        format_or_badges.append(f"{word.upper()}-1")
-                                        format_or_badges.append(f"{word.upper()}-5")
-                                        format_or_badges.append(f"{word.upper()}-10")
-                                    else:
-                                        formatted_words.append(word.upper())
-                                        format_or_badges.append(' '.join(formatted_words))
-                            format_or_badges.append(' '.join(formatted_words))
-                        format_and_badges = []
-                        for badge in and_badges:
-                            formatted_words = []
-                            for word in badge.split('_'):
-                                if param == 'badges':
-                                    if word[0].isalpha():
-                                        formatted_words.append(word.capitalize())
-                                    else:
-                                        formatted_words.append(word[0] + word[1].capitalize())
-                                else:
-                                    if '-' not in word:
-                                        format_or_badges.append(f"{word.upper()}-1")
-                                        format_or_badges.append(f"{word.upper()}-5")
-                                        format_or_badges.append(f"{word.upper()}-10")
-                                    else:
-                                        formatted_words.append(word.upper())
-                                        format_and_badges.append(' '.join(formatted_words))
-                        if 'sqlite' in os.environ['DATABASE_URL']:
-                            or_badges_queries = [~(getattr(models.Card, param)[badge[1:]]) if badge.startswith('!') else getattr(models.Card, param)[badge] for badge in format_or_badges]
-                            and_badges_queries = [~(getattr(models.Card, param)[badge[1:]]) if badge.startswith('!') else getattr(models.Card, param)[badge] for badge in format_and_badges]
-                        else:
-                            or_badges_queries = [~(getattr(models.Card, param).op("?")(badges[1:])) if badge.startswith('!') else getattr(models.Card, param).op("?")(badge) for badge in format_or_badges]
-                            and_badges_queries = [~(getattr(models.Card, param).op("?")(badges[1:])) if badge.startswith('!') else getattr(models.Card, param).op("?")(badge) for badge in format_and_badges]
+                        and_badges_queries = [~(getattr(models.Card, param).op("?")(badges[1:])) if badge.startswith('!') else getattr(models.Card, param).op("?")(badge) for badge in format_and_badges]
 
                 if param in ('name', 'type', 'region', 'flag', 'motto'):
                     value = request.query_params[param]
                     values = value.split(",") if value else []
-                    if value.startswith('=') or '!=' in value:
-                        formatted_values = [~getattr(models.Card, param) == value[2:] if value is not None and value.startswith('!') else getattr(models.Card, param) == value[1:] if value is not None else True for value in values]
-                        match_queries.append(*formatted_values)
-                    else:
-                        formatted_values = [~getattr(models.Card, param).ilike(f"%{value[1:].replace(' ', '_')}%") if value is not None and value.startswith('!') else getattr(models.Card, param).ilike(f"%{value.replace(' ', '_')}%") if value is not None else True for value in values]
-                        match_queries.append(or_(*formatted_values) if formatted_values is not None else True)
+                    formatted_values = [~getattr(models.Card, param).ilike(f"%{value[1:].replace(' ', '_')}%") if value is not None and value.startswith('!') else getattr(models.Card, param).ilike(f"%{value.replace(' ', '_')}%") if value is not None else True for value in values]
+                    match_queries.append(or_(*formatted_values) if formatted_values is not None else True)
 
+                match_queries = match_queries + [and_(*and_badges_queries if and_badges_queries is not None else True)]
                 if param in ('category', 'cardcategory'):
                     value = request.query_params[param]
                     values = value.split(",") if value else []
@@ -206,18 +169,21 @@ async def index(
                         values = [' '.join(word.capitalize() if word[0].isalpha() else word[0] + word[1].capitalize() + word[2:] for word in value.split('_')) for value in values]
                     formatted_values = [~(getattr(models.Card, param) == value[1:]) if value is not None and value.startswith('!') else getattr(models.Card, param) == value if value is not None else True for value in values]
                     match_queries.append(or_(*formatted_values))
+
+                if param == 'season':
+                    value = request.query_params[param]
+                    values = value.split(",") if value else []
+                    formatted_values = [~(getattr(models.Card, param) == str(value)[1:]) if value is not None and str(value).startswith('!') else getattr(models.Card, param) == str(value) if value is not None else True for value in values]
+                    match_queries.append(or_(*formatted_values) if formatted_values is not None else True)
+
             query_finales = db.query(models.Card).filter(
-                    models.Card.season != str(season[1:]) if str(season).startswith('!') else models.Card.season == str(season) if season is not None else True,
                     models.Card.region.is_(None) if exnation is not None else True,
                     *match_queries if match_queries is not None else True,
-                    *sans_queries if sans_queries is not None else True,
-                    or_(*or_badges_queries) if or_badges_queries is not None else True,
-                    *and_badges_queries if and_badges_queries is not None else True,
             )
 
             if all(value is None for value in (name, type, motto, category, region, flag, badges, trophies, cardcategory)) and season is not None:
                 mode = "names"
-            
+
             if (mode is not None and mode == "names"):
                 query_finales = query_finales.with_entities(models.Card.name, models.Card.id, models.Card.season).all()
                 res_names = {"cards": [{"name": card.name, "id": card.id, "season": card.season} for card in query_finales]}
@@ -239,15 +205,17 @@ async def index(
                     cache.set(str(request.query_params), json.dumps(card_dicts))
                     cache.expire(str(request.query_params), 3600)
                     return card_dicts
+
     except HTTPException as http_exception:
         if http_exception.status_code != 400:
             http_exception.status_code = 500
             http_exception.detail = f"The server had trouble understanding your request: {http_exception.detail}"
         raise
+
     except Exception as e:
         print(f"Error in /cards endpoint: {e}")
         raise HTTPException(status_code=500, detail="The server had trouble understanding your request.")
-        
+
 @app.post("/collection")
 @limiter.limit("30/minute")
 async def index(request: Request, db: Session = Depends(get_db), cache: Union[Redis, None] = Depends(get_redis),):
@@ -271,6 +239,18 @@ async def index(request: Request, db: Session = Depends(get_db), cache: Union[Re
             cache.set(str(request.query_params), json.dumps(card_dicts))
             cache.expire(str(request.query_params), 3600)
             return card_dicts
+
     except Exception as e:
         print(f"Error in /cards endpoint: {e}")
         raise HTTPException(status_code=500, detail="The server had trouble understanding your request.")
+
+@app.get("/cards/{name}")
+async def get_card_by_name(db: Session = Depends(get_db), name: str | None = None):
+    name = name.lower()
+    card = db.query(models.Card).filter(
+        models.Card.name.ilike(name),
+    ).first()
+    if card:
+        return {"card": {"name": card.name, "season": card.season, "id": card.id}}
+    else:
+        raise HTTPException(status_code=404, detail=f"Card with name {name} not found")
