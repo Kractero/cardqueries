@@ -1,27 +1,5 @@
 version: "3.9"
 services:
-    # spun down and up often
-    portainer:
-        container_name: portainer
-        restart: unless-stopped
-        volumes:
-            - /etc/localtime:/etc/localtime:ro
-            - /var/run/docker.sock:/var/run/docker.sock
-            - ./portainer/data:/data
-        image: portainer/portainer-ce:latest
-        security_opt:
-            - no-new-privileges:true
-    # make nginx easier
-    nginxproxymanager:
-      image: 'jc21/nginx-proxy-manager:latest'
-      restart: unless-stopped
-      ports:
-        - '80:80'
-        - '443:443'
-      container_name: nginx_proxy_manager
-      volumes:
-        - ./npm/data:/data
-        - ./npm/letsencrypt:/etc/letsencrypt
     web:
       build:
         context: ./frontend
@@ -33,6 +11,8 @@ services:
         - ./frontend:/app
         - /app/node_modules
         - /app/.next
+      networks:
+        - reverse-proxy
     backend:
       build:
         context: ./backend
@@ -57,6 +37,8 @@ services:
       links:
         - db
         - cache
+      networks:
+        - reverse-proxy
     db:
       image: postgres:14
       restart: always
@@ -80,40 +62,12 @@ services:
         - AUTOHEAL_CONTAINER_LABEL=all
       volumes:
         - /var/run/docker.sock:/var/run/docker.sock
-    # at some point
-#    caddy:
-#      image: caddy:latest
-#      restart: unless-stopped
-#      container_name: caddy
-#      ports:
-#        - 80:80
-#        - 443:443
-#      volumes:
-#        - ./caddy/Caddyfile:/etc/caddy/Caddyfile
-#        - ./caddy/site:/srv
-#        - ./caddy/caddy_data:/data
-#        - ./caddy/caddy_config:/config
-    glances:
-      image: nicolargo/glances:latest-full
-      pid: host
-      container_name: glances
-      volumes:
-        - /:/rootfs:ro
-        - /var/run/docker.sock:/var/run/docker.sock
-      environment:
-        - GLANCES_OPT=-w --password
-      secrets:
-      - source: glances_password
-        target: /root/.config/glances/glances.pwd
-
-secrets:
-  glances_password:
-    file: ./glances.pwd
 
 volumes:
-  # caddy_data:
-  #   external: true
-  # caddy_config:
   pgdata:
     external: true
   redis:
+
+networks:
+  reverse-proxy:
+    external: true
